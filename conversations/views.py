@@ -390,7 +390,7 @@ class SentMessages(MethodView):
             .order_by(Conversation.date_modified.desc())
             .paginate(
                 page=page, per_page=flaskbb_config["TOPICS_PER_PAGE"], error_out=False
-            )
+            ))
 
         return render_template("sent.html", conversations=conversations)
 
@@ -411,7 +411,7 @@ class DraftMessages(MethodView):
             .order_by(Conversation.date_modified.desc())
             .paginate(
                 page=page, per_page=flaskbb_config["TOPICS_PER_PAGE"], error_out=False
-            )
+            ))
 
         return render_template("drafts.html", conversations=conversations)
 
@@ -431,7 +431,7 @@ class TrashedMessages(MethodView):
             .order_by(Conversation.date_modified.desc())
             .paginate(
                 page=page, per_page=flaskbb_config["TOPICS_PER_PAGE"], error_out=False
-            )
+            ))
         return render_template("trash.html", conversations=conversations)
 
 
