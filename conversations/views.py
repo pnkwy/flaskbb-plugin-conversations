@@ -84,7 +84,9 @@ class Inbox(MethodView):
                 Conversation.trash == False,
             )
             .order_by(Conversation.date_modified.desc())
-            .paginate(page, flaskbb_config["TOPICS_PER_PAGE"], False)
+            .paginate(
+                page=page, per_page=flaskbb_config["TOPICS_PER_PAGE"], error_out=False
+            )
         )
 
         return render_template("inbox.html", conversations=conversations)
@@ -386,8 +388,9 @@ class SentMessages(MethodView):
                 db.not_(Conversation.to_user_id == current_user.id),
             )
             .order_by(Conversation.date_modified.desc())
-            .paginate(page, flaskbb_config["TOPICS_PER_PAGE"], False)
-        )
+            .paginate(
+                page=page, per_page=flaskbb_config["TOPICS_PER_PAGE"], error_out=False
+            )
 
         return render_template("sent.html", conversations=conversations)
 
@@ -406,8 +409,9 @@ class DraftMessages(MethodView):
                 Conversation.trash == False,
             )
             .order_by(Conversation.date_modified.desc())
-            .paginate(page, flaskbb_config["TOPICS_PER_PAGE"], False)
-        )
+            .paginate(
+                page=page, per_page=flaskbb_config["TOPICS_PER_PAGE"], error_out=False
+            )
 
         return render_template("drafts.html", conversations=conversations)
 
@@ -425,9 +429,9 @@ class TrashedMessages(MethodView):
                 Conversation.trash == True,
             )
             .order_by(Conversation.date_modified.desc())
-            .paginate(page, flaskbb_config["TOPICS_PER_PAGE"], False)
-        )
-
+            .paginate(
+                page=page, per_page=flaskbb_config["TOPICS_PER_PAGE"], error_out=False
+            )
         return render_template("trash.html", conversations=conversations)
 
 
